@@ -76,7 +76,7 @@ include 'Config/database.php';
 							<article style="height: auto; width: auto;">
 							<a href="movie_description.html"><img alt="island" class="img-fluid" src="./assets/image/account/island.png" style="max-height: 127px; height: auto; width: 192px;"></a>
 						</div>
-					<div class="col-7 col-lg-4">
+					<div class="col-7 col-lg-3">
 						<h2 class="titre2 text-truncate ">Shutter Island</h2>
 						<p class="overflow-hidden" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores nisi, sapiente vel incidunt optio iusto dolore ipsa repellendus deleniti nulla eos qui excepturi necessitatibus culpa itaque numquam iste rerum nobis!</p>
 					</article>
@@ -101,7 +101,7 @@ include 'Config/database.php';
 							<article>
 								<a href="movie_description.html"><img alt="Leonardo di caprio" class="img-fluid" src="./assets/image/account/leo.png" style="max-height: 127px; height: auto; width: 192px;"></a>
 					</div>
-					<div class="col-7 col-lg-4">
+					<div class="col-7 col-lg-3">
 						<h2 class="titre2 text-truncate">Léonardo Di Caprio</h2>
 						<p class="overflow-hidden" style="height: 60px;  max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis qui soluta et suscipit. Ducimus, illum eaque corrupti vel ea consectetur? Quia molestias et corrupti aliquam in hic nemo, dicta ad!</p>
 					</article>
@@ -126,7 +126,7 @@ include 'Config/database.php';
 							<article>
 								<a href=""><img alt="Barbie" class="img-fluid" src="./assets/image/account/barbie.png" style="max-height: 127px; height: auto;width: 192px;"></a>
 					</div>
-					<div class="col-7 col-lg-4">
+					<div class="col-7 col-lg-3">
 						<h2 class="titre2 text-truncate">Barbie</h2>
 						<p class="overflow-hidden" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam obcaecati molestias ut. Nihil itaque dicta, neque molestias aspernatur cumque unde. Quia voluptatem tempora velit. Voluptatibus modi aut consequuntur earum eos.</p>
 					</article>
