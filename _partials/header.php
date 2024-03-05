@@ -1,3 +1,11 @@
+<?php 
+include 'Config/database.php'; 
+$sql = "SELECT * FROM categories";
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
+	
 <header class="sticky-top" style="background-color: #434343;">
 		<nav class="navbar navbar-expand-xl">
 		  <div class="container-fluid align-items-center">
