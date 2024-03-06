@@ -1,30 +1,44 @@
 <?php
-include 'Config/database.php';
+    include 'Config/Database.php';
+
+    $sql = "SELECT article.* 
+            FROM article
+            INNER JOIN categories  
+                ON article.categories_id = categories.id 
+            WHERE categories.title = 'Musique'
+            ORDER BY article.id DESC
+            Limit 6
+            ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php include ('_partials/head.php') ?>
+    <?php include '_partials/head.php'; ?>
 <body>
-<?php include ('_partials/header.php') ?>
-<main>
+    <?php include '_partials/header.php'; ?>   
+    <main>
         <!--Slider-->
         <div class="row" id="banner">
             <div class="col-12 col-md-12">
-                <img src="./assets/image/accueil/slide-acceuil.jpg" class="marginneg" alt="slider" style="height: 100%; width: 101.2%;"
+                <img src="./assets/image/accueil/slide-acceuil.jpg" alt="slider" width="1920" height="305"
                     class="slider mt-3">
                 <!--<h1 class="slide text-center">Actuellement</h1>-->
             </div>
         </div>
+
         <!--Hook of the web site-->
         <div>
             <h1 class="tittle text-uppercase gras text-center py-3 titre mb-1 "><strong>distinguer le remarquable du
                     banal!</strong></h1>
         </div>
-        <h2 class="category text-uppercase gras text-center py-2 stitre"><strong>cinéma</strong></h2>
+
         <div class="container-fluid">
             <!--Category 1 title-->
             <section class="col-12">
                 <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre"><strong>cinéma</strong></h2>
                     <!--MOVIE-->
                     <article class="col-4">
                         <img class="img-fluid mt-3 rounded-5" src="./assets/image/accueil/cimema-accueil.jpg"
@@ -33,105 +47,34 @@ include 'Config/database.php';
                     <!--Movie section 1-->
                     <div class="col-8 pt-3">
                         <div class="row">
+                            <?php while($cine = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                             <div class="col-6">
                                 <div class="row">
                                     <article class="col-4 col-lg-6 ">
                                         <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-aquaman.jpg" alt="image film aquaman"
+                                            src="./assets/image/covers/<?php echo $cine['cover'] ?>" alt="image film aquaman"
                                             width="192" height="127" style="height: auto; width: auto;">
                                     </article>
                                     <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>aquaman</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
+                                        <h3 class="align-baseline text-capitalize"><strong><?= $cine['title'] ?></strong></h3>
+                                        <p class="overflow-scroll">
+                                        
+                                        <?= substr($cine['description'], 0, 30) ?></p>
+                                        <p>publié le<timer><?= $cine['created_at'] ?></timer>
                                     </article>
                                 </div>
                             </div>
-                            <!--Movie section 2-->
-                            <div class="col-6">
-                                <div class="row">
-                                    <article class="col-4 col-lg-6 ">
-                                        <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-aquaman.jpg" alt="image film aquaman"
-                                            width="192" height="127" style="height: auto; width: auto;">
-                                    </article>
-                                    <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>barbie</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
-                                    </article>
-                                </div>
-                            </div>
-                            <!--Movie section 3-->
-                            <div class="col-6">
-                                <div class="row">
-                                    <article class="col-4 col-lg-6 ">
-                                        <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-dune.jpg" alt="image film dune"
-                                            width="192" height="127" style="height: auto; width: auto;">
-                                    </article>
-                                    <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>dune</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
-                                    </article>
-                                </div>
-                            </div>
-                            <!--Movie section 4-->
-                            <div class="col-6">
-                                <div class="row">
-                                    <article class="col-4 col-lg-6 ">
-                                        <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-krisha.jpg" alt="image film krisha"
-                                            width="192" height="127" style="height: auto; width: auto;">
-                                    </article>
-                                    <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>krisha</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
-                                    </article>
-                                </div>
-                            </div>
-                            <!--Movie section 5-->
-                            <div class="col-6">
-                                <div class="row">
-                                    <article class="col-4 col-lg-6 ">
-                                        <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-dvdspec.jpg" alt="image film dvd spectacle"
-                                            width="192" height="127" style="height: auto; width: auto;">
-                                    </article>
-                                    <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>dvd spectacle</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
-                                    </article>
-                                </div>
-                            </div>
-                            <!--Movie section 6-->
-                            <div class="col-6">
-                                <div class="row">
-                                    <article class="col-4 col-lg-6 ">
-                                        <img class="img-fluid mt-3 rounded-5"
-                                            src="./assets/image/accueil/accine-lanuee.jpg" alt="image film la nuée"
-                                            width="192" height="127" style="height: auto; width: auto;">
-                                    </article>
-                                    <article class="col-4 col-lg-6 ">
-                                        <h3 class="align-baseline text-capitalize"><strong>la nuée</strong></h3>
-                                        <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer>
-                                    </article>
-                                </div>
-                            </div>
+                            <?php endwhile; ?>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-        <h2 class="text-uppercase gras text-center py-2 stitre mt-3"><strong>série</strong></h2>
         <div class="container-fluid">
             <!--Category 2 title-->
             <section class="col-12">
-                <div class="row">    
+                <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>série</strong></h2>
                     <!--SERIES-->
                     <div class="col-sm-8 pt-3">
                         <div class="row">
@@ -238,11 +181,11 @@ include 'Config/database.php';
                 </div>
              </section>
         </div>
-        <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>gaming</strong></h2>
         <div class="container-fluid">
             <!--Category 3 title-->
             <section class="col-12">
                 <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>gaming</strong></h2>
                     <!--GAMING-->
                     <article class="col-4">
                         <img class="img-fluid mt-3 rounded-5" src="./assets/image/accueil/gaming-accueil.jpg"
@@ -345,11 +288,11 @@ include 'Config/database.php';
                 </div>
             </section>
         </div>
-        <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>musique</strong></h2>
         <div class="container-fluid">
             <!--Category 4 title-->
             <section class="col-12">
                 <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>musique</strong></h2>
                     <!--MUSIC-->
                <div class="col-sm-8">
                         <div class="row">
@@ -455,11 +398,11 @@ include 'Config/database.php';
                 </div>
              </section>
         </div>
-        <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>livre</strong></h2>
         <div class="container-fluid">
             <!--Category 5 title-->
             <section class="col-12">
                 <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>livre</strong></h2>
                     <!--BOOK-->
                     <article class="col-4">
                         <img class="img-fluid mt-3 rounded-5" src="./assets/image/accueil/livre-accueil.jpg"
@@ -562,11 +505,11 @@ include 'Config/database.php';
                 </div>
             </section>
         </div>
-        <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>événement</strong></h2>
         <div class="container-fluid">
             <!--Category 6: title-->
             <section class="col-12">
                 <div class="row">
+                    <h2 class="category text-uppercase gras text-center py-2 stitre mt-3"><strong>événement</strong></h2>
                     <!--EVENTS-->
                     <div class="col-sm-8">
                         <div class="row">
@@ -591,7 +534,7 @@ include 'Config/database.php';
                                     <article class="col-4 col-lg-6 text-lg-end">
                                         <h3 class="align-baseline text-capitalize"><strong>exposition street art</strong></h3>
                                         <p class="overflow-scroll" style="height: 60px; max-width: 300px; width: auto;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe sint in repellat officiis cum.</p>
-                                        <p>publié le<timer>24/01/2024</timer></p>
+                                        <p>publié le<timer>24/01/2024</timer>
                                     </article>
                                     <article class="col-4 col-lg-6 ">
                                         <img class="img-fluid mt-3 rounded-5"
@@ -679,6 +622,6 @@ include 'Config/database.php';
             </section>
         </div>
     </main>
-<?php include ('_partials/footer.php') ?>
+    <?php include '_partials/footer.php'; ?>
 </body>
 </html>
