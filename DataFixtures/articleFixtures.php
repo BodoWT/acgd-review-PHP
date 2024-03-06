@@ -15,11 +15,11 @@ $categories = $categoriesStatement->fetchAll();
 $faker = Faker\Factory::create();
 
 $distri = [
-            [
-            'url' => $faker->url,
-            'logo' => $faker->imageUrl(),
-            'title' => $faker->word(),
-            ]
+            
+            $faker->url,
+            $faker->imageUrl(),
+            $faker->word(),
+            
         ];
 
 // insérer dix utilisateurs dans la base de données
