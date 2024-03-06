@@ -16,7 +16,7 @@ for ($i = 0; $i < 10; $i++ ) {
         'birth_date' => $faker->date(),
         'is_valide' => true,
         'created_at' => $faker->date(),
-        'role' => '["ROLE_USER"]'
+        'role' => '["ROLE_USER"]',
 
     ]);
 }

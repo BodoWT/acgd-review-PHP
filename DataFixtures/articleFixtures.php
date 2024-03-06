@@ -2,35 +2,42 @@
 include '../Config/database.php';
 require_once '../vendor/autoload.php';
 
-$users = "SELECT id FROM user";
-$use = $conn->prepare($users);
-    $use->execute();
-    $user = $use->fetchAll();
+$user = "SELECT id FROM user";
+$usersStatement = $conn->prepare($user);
+$usersStatement->execute();
+$users = $usersStatement->fetchAll();
+
 $categorie = "SELECT id FROM categories";
-$rec = $conn->prepare($categorie);
-    $rec->execute();
-    $categories = $rec->fetchAll();
-
-
+$categoriesStatement = $conn->prepare($categorie);
+$categoriesStatement->execute();
+$categories = $categoriesStatement->fetchAll();
 
 $faker = Faker\Factory::create();
 
-// insert ten users into the database
-for ($i = 0; $i < 10; $i++ ) {
-    $sql = "INSERT INTO article (`title`,`categories_id`, `user_id`, `slug`,`created_at`, `updated_at`, `description`, `youtube`, `cover`,`our_review`, `distribution`) 
-    VALUES(:title, :categories_id, :user_id, :slug, :created_at, :updated_at, :description, :cover, :our_review, :distribution)";
+$distri = [
+            [
+            'url' => $faker->url,
+            'logo' => $faker->imageUrl(),
+            'title' => $faker->word(),
+            ]
+        ];
+
+// insérer dix utilisateurs dans la base de données
+for ($i = 0; $i < 100; $i++) {
+    $sql = "INSERT INTO article (`title`, `categories_id`, `user_id`, `slug`, `created_at`, `updated_at`, `description`, `youtube`, `cover`, `our_review`, `distribution`) 
+            VALUES(:title, :categories_id, :user_id, :slug, :created_at, :updated_at, :description, :youtube, :cover, :our_review, :distribution)";
     $stmt = $conn->prepare($sql);
     $stmt->execute([
-        'title' => $faker->title(),
-        'categories_id' => $categories,
-        'user_id' => $user,
-        'slug' => $faker->url(),
+        'title' => $faker->sentence(),
+        'categories_id' => $categories[array_rand($categories)]['id'],
+        'user_id' => $users[array_rand($users)]['id'],
+        'slug' => $faker->slug,
         'created_at' => $faker->date(),
         'updated_at' => $faker->date(),
-        'description' =>$faker->paragraph(),
-        'youtube' =>$faker->slug(),
-        'cover' => $faker->date(),
+        'description' => $faker->paragraph(),
+        'youtube' => $faker->url,
+        'cover' => $faker->imageUrl(),
         'our_review' => $faker->text(),
-        'distribution' => '["distribution"]',
+        'distribution' => json_encode($distri),
     ]);
 }
